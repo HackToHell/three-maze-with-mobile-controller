@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        .button5 {
+            border-radius: 100%;
+        }
+    </style>
+    <script src="socket.io.js"></script>
+</head>
+
+<body>
+
+    <center>
+        <button class="button button5" onclick="up()">Up</button>
+    </center>
+    <br>
+    <br>
+    <div style="text-align:left">
+        <button class="button button5" onclick="left()">Left</button>
+    </div>
+    <div style="text-align:right">
+        <button class="button button5" onclick="right()">Right</button>
+    </div>
+    <br>
+
+    <br>
+    <center>
+        <button class="button button5" onclick="down()">Down</button>
+    </center>
+    <script>
+        var socket = io('http://localhost');
+        socket.on('keypress', function (data) {
+            console.log(data);
+
+        });
+        function up(){
+            socket.emit('up',{ up : 'up' } )
+        }
+        function down(){
+            socket.emit('down',{down : 'down'})
+        }
+        function left(){
+            socket.emit('left',{left : 'left'})
+        }
+        function right(){
+            socket.emit('right' , {right : 'right'})
+        }
+    </script>
+</body>
+
+</html>
