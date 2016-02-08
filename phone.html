@@ -1,6 +1,15 @@
 <html>
 
 <head>
+    <meta name="viewport" content="
+    height = device-height,
+    width = device-width,
+    initial-scale = 1.0,
+    minimum-scale = 1.0,
+    maximum-scale = 1.0,
+    user-scalable = no,
+    target-densitydpi = device-dpi
+    " />
     <style>
         .button {
             background-color: #4CAF50;
@@ -44,23 +53,46 @@
         <button class="button button5" onclick="down()">Down</button>
     </center>
     <script>
-        var socket = io('http://localhost');
+        var socket = io('http://192.168.137.1');
         socket.on('keypress', function (data) {
             console.log(data);
 
         });
-        function up(){
-            socket.emit('up',{ up : 'up' } )
+
+        function up() {
+            socket.emit('up', {
+                up: 'up'
+            })
         }
-        function down(){
-            socket.emit('down',{down : 'down'})
+
+        function down() {
+            socket.emit('down', {
+                down: 'down'
+            })
         }
-        function left(){
-            socket.emit('left',{left : 'left'})
+
+        function left() {
+            socket.emit('left', {
+                left: 'left'
+            })
         }
-        function right(){
-            socket.emit('right' , {right : 'right'})
+
+        function right() {
+            socket.emit('right', {
+                right: 'right'
+            })
         }
+
+        function handleOrientation(event) {
+            var y = event.gamma;
+            var z = event.alpha;
+            socket.emit('accel', {
+                "y": y,
+                "z": z
+            });
+        }
+
+        window.addEventListener('deviceorientation', handleOrientation);
     </script>
 </body>
 

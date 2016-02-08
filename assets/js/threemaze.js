@@ -184,7 +184,7 @@
         this.materials =
         {
             grey: new THREE.MeshLambertMaterial({color: 0xffffff, wireframe: false}),
-            red: new THREE.MeshLambertMaterial({color: 0xf18260, ambient: 0xf18260, lineWidth: 1})
+            red: new THREE.MeshLambertMaterial({color: 0x70E60E, ambient: 0x70E60E, lineWidth: 1})
         };
 
         // Camera
@@ -349,6 +349,8 @@
                 z: this.cameraHelper.rotation.z + ((evt.pageY - this.camera.clicked.y) / 800),
                 y: this.cameraHelper.rotation.y + ((this.camera.clicked.x - evt.pageX) / 800)
             };
+            console.log(evt.pageX);
+            console.log(evt.pageY);
             if (target_rotation.z < 0)
             {
                 target_rotation.z = 0;
